@@ -1,0 +1,119 @@
+<div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden" style='font-family: Inter, "Noto Sans", sans-serif;'>
+    <div class="layout-container flex h-full grow flex-col">
+        
+        <app-navbar></app-navbar>
+
+        <div class="px-40 flex flex-1 justify-center py-5">
+            <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+                <div class="flex flex-wrap justify-between gap-3 p-4">
+                    <div class="flex min-w-72 flex-col gap-3">
+                        <p class="text-[#111418] tracking-light text-[32px] font-bold leading-tight">New product</p>
+                        <p class="text-[#60748a] text-sm font-normal leading-normal">This information will be displayed publicly so be careful what you share.</p>
+                    </div>
+                </div>
+
+                <h3 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">General information</h3>
+                <ng-container *ngFor="let field of fields">
+                    <div *ngIf="['name', 'desc', 'category', 'brand'].includes(field.name)" class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                        <label class="flex flex-col min-w-40 flex-1">
+                            <p class="text-[#111418] text-base font-medium leading-normal pb-2">{{ field.label }}<span *ngIf="field.required" class="text-red-500">*</span></p>
+                            <div [ngSwitch]="field.type">
+                                <input *ngSwitchCase="'text'"
+                                    [type]="field.type"
+                                    [placeholder]="field.placeholder || ''"
+                                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111418] focus:outline-0 focus:ring-0 border border-[#dbe0e6] bg-white focus:border-[#dbe0e6] h-14 placeholder:text-[#60748a] p-[15px] text-base font-normal leading-normal"
+                                    [(ngModel)]="product[field.name]"
+                                    [required]="field.required"
+                                />
+                                <textarea *ngSwitchCase="'textarea'"
+                                    [placeholder]="field.placeholder || ''"
+                                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111418] focus:outline-0 focus:ring-0 border border-[#dbe0e6] bg-white focus:border-[#dbe0e6] min-h-36 placeholder:text-[#60748a] p-[15px] text-base font-normal leading-normal"
+                                    [(ngModel)]="product[field.name]"
+                                    [required]="field.required"
+                                ></textarea>
+                            </div>
+                        </label>
+                    </div>
+                </ng-container>
+
+                <h3 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Media</h3>
+                <div class="flex flex-col p-4">
+                    <div class="flex flex-col items-center gap-6 rounded-lg border-2 border-dashed border-[#dbe0e6] px-6 py-14">
+                        <div class="flex max-w-[480px] flex-col items-center gap-2">
+                            <p class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] max-w-[480px] text-center">Upload product images</p>
+                            <p class="text-[#111418] text-sm font-normal leading-normal max-w-[480px] text-center">We recommend using high-quality .jpg files less than 5MB each.</p>
+                        </div>
+                        <button
+                            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#f0f2f5] text-[#111418] text-sm font-bold leading-normal tracking-[0.015em]"
+                        >
+                            <span class="truncate">Upload images</span>
+                        </button>
+                        <ng-container *ngFor="let field of fields">
+                            <input *ngIf="field.name === 'imageUrl'"
+                                [type]="field.type"
+                                [placeholder]="field.placeholder || ''"
+                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111418] focus:outline-0 focus:ring-0 border border-[#dbe0e6] bg-white focus:border-[#dbe0e6] h-10 placeholder:text-[#60748a] p-[15px] text-sm font-normal leading-normal"
+                                [(ngModel)]="product[field.name]"
+                                [required]="field.required"
+                            />
+                        </ng-container>
+                    </div>
+                </div>
+
+                <h3 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Pricing</h3>
+                <ng-container *ngFor="let field of fields">
+                    <div *ngIf="['price', 'salePrice'].includes(field.name)" class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                        <label class="flex flex-col min-w-40 flex-1">
+                            <p class="text-[#111418] text-base font-medium leading-normal pb-2">{{ field.label }}<span *ngIf="field.required" class="text-red-500">*</span></p>
+                            <input
+                                [type]="field.type"
+                                [placeholder]="field.placeholder || ''"
+                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111418] focus:outline-0 focus:ring-0 border border-[#dbe0e6] bg-white focus:border-[#dbe0e6] h-14 placeholder:text-[#60748a] p-[15px] text-base font-normal leading-normal"
+                                [(ngModel)]="product[field.name]"
+                                [required]="field.required"
+                            />
+                        </label>
+                    </div>
+                </ng-container>
+
+                <h3 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Inventory</h3>
+                <ng-container *ngFor="let field of fields">
+                    <div *ngIf="['SKU', 'quantity'].includes(field.name)" class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                        <label class="flex flex-col min-w-40 flex-1">
+                            <p class="text-[#111418] text-base font-medium leading-normal pb-2">{{ field.label }}<span *ngIf="field.required" class="text-red-500">*</span></p>
+                            <input
+                                [type]="field.type"
+                                [placeholder]="field.placeholder || ''"
+                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111418] focus:outline-0 focus:ring-0 border border-[#dbe0e6] bg-white focus:border-[#dbe0e6] h-14 placeholder:text-[#60748a] p-[15px] text-base font-normal leading-normal"
+                                [(ngModel)]="product[field.name]"
+                                [required]="field.required"
+                            />
+                        </label>
+                    </div>
+                    <div *ngIf="field.name === 'inStock'" class="flex max-w-[480px] flex-wrap items-center gap-2 px-4 py-3">
+                        <input [type]="field.type" [id]="field.name" [(ngModel)]="product[field.name]" class="form-checkbox h-4 w-4 text-[#0c77f2] border-[#dbe0e6] rounded">
+                        <label [for]="field.name" class="text-[#111418] text-base font-medium leading-normal">{{ field.label }}</label>
+                    </div>
+                </ng-container>
+
+
+                <div class="flex justify-stretch">
+                    <div class="flex flex-1 gap-3 flex-wrap px-4 py-3 justify-end">
+                        <button
+                            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#f0f2f5] text-[#111418] text-sm font-bold leading-normal tracking-[0.015em]"
+                            (click)="resetForm()"
+                        >
+                            <span class="truncate">Cancel</span>
+                        </button>
+                        <button
+                            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#0c77f2] text-white text-sm font-bold leading-normal tracking-[0.015em]"
+                            (click)="createProduct()"
+                        >
+                            <span class="truncate">Create product</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
