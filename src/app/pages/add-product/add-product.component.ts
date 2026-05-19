@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 
 import formFields from '../../../../public/widget.json';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
+import { environment } from '../../../environments/environment'
 
 interface FormField {
   label: string;
@@ -30,7 +31,7 @@ export class AddProductComponent implements OnInit {
   product: { [key: string]: any } = {};
   fields: FormField[] = formFields;
 
-  private apiUrl = 'http://127.0.0.1:8000/products';
+  private apiUrl = `${environment.apiUrl}/products/add`;
 
   constructor(private http: HttpClient) {}
 

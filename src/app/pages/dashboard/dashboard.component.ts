@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { NavbarComponent } from "../../components/navbar/navbar.component";
 import { HttpClient } from "@angular/common/http";
 import { CommonModule } from "@angular/common";
+import { environment } from '../../../environments/environment'
 
 interface Product {
     _id: {
@@ -40,7 +41,7 @@ export class Dashboard implements OnInit {
     }
 
     fetchKeyMetrics(): void {
-        this.http.get<Product[]>('http://127.0.0.1:8000/products').subscribe(
+        this.http.get<Product[]>(`${environment.apiUrl}/products`).subscribe(
             (data: Product[]) => {
 
                 this.totalProducts = data.length;

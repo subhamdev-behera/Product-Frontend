@@ -37,14 +37,14 @@
   {
     "label": "Price",
     "type": "number",
-    "placeholder": "$0.00",
+    "placeholder": "₹0.00",
     "name": "price",
     "required": true
   },
   {
     "label": "Sale Price", 
     "type": "number",
-    "placeholder": "$0.00",
+    "placeholder": "₹0.00",
     "name": "salePrice",  
     "required": false
   },

@@ -55,6 +55,7 @@
                                 class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111418] focus:outline-0 focus:ring-0 border border-[#dbe0e6] bg-white focus:border-[#dbe0e6] h-10 placeholder:text-[#60748a] p-[15px] text-sm font-normal leading-normal"
                                 [(ngModel)]="product[field.name]"
                                 [required]="field.required"
+                                title = "Image"
                             />
                         </ng-container>
                     </div>
@@ -91,7 +92,7 @@
                         </label>
                     </div>
                     <div *ngIf="field.name === 'inStock'" class="flex max-w-[480px] flex-wrap items-center gap-2 px-4 py-3">
-                        <input [type]="field.type" [id]="field.name" [(ngModel)]="product[field.name]" class="form-checkbox h-4 w-4 text-[#0c77f2] border-[#dbe0e6] rounded">
+                        <input [type]="field.type" [id]="field.name" [(ngModel)]="product[field.name]" title="Product Status" class="form-checkbox h-4 w-4 text-[#0c77f2] border-[#dbe0e6] rounded">
                         <label [for]="field.name" class="text-[#111418] text-base font-medium leading-normal">{{ field.label }}</label>
                     </div>
                 </ng-container>

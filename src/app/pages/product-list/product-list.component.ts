@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
+import { environment } from '../../../environments/environment'
 
 interface Product {
   _id: string;
@@ -44,7 +45,7 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     // Fetch all products initially
-    this.http.get<Product[]>('http://127.0.0.1:8000/products').subscribe((products) => {
+    this.http.get<Product[]>(`${environment.apiUrl}/products`).subscribe((products) => {
       this.allProductsSubject.next(products);
       this.calculateTotalPages(products.length);
     });
